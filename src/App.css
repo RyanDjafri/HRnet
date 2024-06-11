@@ -14,10 +14,25 @@
 
 label {
     display: block;
-    margin-top: 1rem;
+    margin-top: 0.65rem;
     margin-bottom: 10px;
 }
-
+input {
+    border-radius:0.5rem;
+    padding:0.25rem;
+}
 .address {
     margin-top: 10px;
+}
+
+form {
+    border-radius: 0.5rem;
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgba(83, 210, 83, 0.484);
+    width:40%;
+    height:95vh;
+    margin:2rem auto;
 }

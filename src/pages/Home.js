@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addEmployee } from "../components/employeeSlice";
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const employees = useSelector((state) => state.employees);
+
   const [states, setStates] = useState([]);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -79,7 +84,6 @@ const Home = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const employees = JSON.parse(localStorage.getItem("employees")) || [];
     const employee = {
       firstName,
       lastName,
@@ -91,13 +95,13 @@ const Home = () => {
       state,
       zipCode,
     };
-    employees.push(employee);
-    localStorage.setItem("employees", JSON.stringify(employees));
+    dispatch(addEmployee(employee));
     alert("Employee saved!");
   };
 
   return (
     <form onSubmit={handleSubmit}>
+      <h1>HRnet</h1>
       <div>
         <label>First Name</label>
         <input

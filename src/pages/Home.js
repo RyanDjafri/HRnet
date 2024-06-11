@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addEmployee } from "../components/employeeSlice";
+import { addEmployee } from "../redux/employeeSlice";
+import Modal from "../components/modal/index";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ const Home = () => {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [zipCode, setZipCode] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const statesData = [
@@ -96,106 +98,126 @@ const Home = () => {
       zipCode,
     };
     dispatch(addEmployee(employee));
-    alert("Employee saved!");
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setFirstName("");
+    setLastName("");
+    setDateOfBirth("");
+    setStartDate("");
+    setDepartment("");
+    setStreet("");
+    setCity("");
+    setState("");
+    setZipCode("");
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>HRnet</h1>
-      <div>
-        <label>First Name</label>
-        <input
-          type="text"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label>Last Name</label>
-        <input
-          type="text"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label>Date of Birth</label>
-        <input
-          type="date"
-          value={dateOfBirth}
-          onChange={(e) => setDateOfBirth(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label>Start Date</label>
-        <input
-          type="date"
-          value={startDate}
-          onChange={(e) => setStartDate(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label>Department</label>
-        <select
-          value={department}
-          onChange={(e) => setDepartment(e.target.value)}
-          required
-        >
-          <option value="">Select</option>
-          <option value="HR">HR</option>
-          <option value="Engineering">Engineering</option>
-          <option value="Sales">Sales</option>
-          <option value="Marketing">Marketing</option>
-        </select>
-      </div>
-      <div>
-        <label>Street</label>
-        <input
-          type="text"
-          value={street}
-          onChange={(e) => setStreet(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label>City</label>
-        <input
-          type="text"
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label>State</label>
-        <select
-          value={state}
-          onChange={(e) => setState(e.target.value)}
-          required
-        >
-          <option value="">Select</option>
-          {states.map((state) => (
-            <option key={state.abbreviation} value={state.abbreviation}>
-              {state.name}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div>
-        <label>Zip Code</label>
-        <input
-          type="text"
-          value={zipCode}
-          onChange={(e) => setZipCode(e.target.value)}
-          required
-        />
-      </div>
-      <button type="submit">Save Employee</button>
-    </form>
+    <div className="form">
+      <form onSubmit={handleSubmit}>
+        <h1>HRnet</h1>
+        <div>
+          <label>First Name</label>
+          <input
+            type="text"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>Last Name</label>
+          <input
+            type="text"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>Date of Birth</label>
+          <input
+            type="date"
+            value={dateOfBirth}
+            onChange={(e) => setDateOfBirth(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>Start Date</label>
+          <input
+            type="date"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>Department</label>
+          <select
+            value={department}
+            onChange={(e) => setDepartment(e.target.value)}
+            required
+          >
+            <option value="">Select</option>
+            <option value="HR">HR</option>
+            <option value="Engineering">Engineering</option>
+            <option value="Sales">Sales</option>
+            <option value="Marketing">Marketing</option>
+          </select>
+        </div>
+        <div>
+          <label>Street</label>
+          <input
+            type="text"
+            value={street}
+            onChange={(e) => setStreet(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>City</label>
+          <input
+            type="text"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>State</label>
+          <select
+            value={state}
+            onChange={(e) => setState(e.target.value)}
+            required
+          >
+            <option value="">Select</option>
+            {states.map((state) => (
+              <option key={state.abbreviation} value={state.abbreviation}>
+                {state.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label>Zip Code</label>
+          <input
+            type="text"
+            value={zipCode}
+            onChange={(e) => setZipCode(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit">Save Employee</button>
+      </form>
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <h2>Employee Saved!</h2>
+        <p>The employee has been successfully saved.</p>
+        <button onClick={closeModal}>Close</button>
+      </Modal>
+    </div>
   );
 };
 

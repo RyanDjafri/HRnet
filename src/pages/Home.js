@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addEmployee } from "../redux/employeeSlice";
-import Modal from "../components/modal/index";
+import { addEmployee } from "../components/redux/reducers/employeeReducer";
+import Modal from "../components/Modal";
 
 const Home = () => {
   const dispatch = useDispatch();

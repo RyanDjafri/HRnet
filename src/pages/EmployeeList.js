@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from "react";
-import DataTable from "../components/datatable/DataTable";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import DataTable from "./DataTable";
 
 const EmployeeList = () => {
-  const [employees, setEmployees] = useState([]);
+  const employees = useSelector((state) => state.employees.employees);
   const [filterText, setFilterText] = useState("");
-
-  useEffect(() => {
-    const storedEmployees = JSON.parse(localStorage.getItem("employees")) || [];
-    setEmployees(storedEmployees);
-  }, []);
 
   const columns = [
     { name: "First Name", selector: (row) => row.firstName, sortable: true },
@@ -42,6 +38,12 @@ const EmployeeList = () => {
   return (
     <div>
       <h1>Current Employees</h1>
+      <input
+        type="text"
+        placeholder="Filter"
+        value={filterText}
+        onChange={handleFilterChange}
+      />
       <DataTable
         columns={columns}
         data={filteredData}

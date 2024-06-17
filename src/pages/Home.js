@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addEmployee } from "../components/redux/reducers/employeeReducer";
 import Modal from "../components/Modal";
 
 const Home = () => {
-  const dispatch = useDispatch();
-  const employees = useSelector((state) => state.employees);
-
   const [states, setStates] = useState([]);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -97,7 +92,6 @@ const Home = () => {
       state,
       zipCode,
     };
-    dispatch(addEmployee(employee));
     setIsModalOpen(true);
   };
 

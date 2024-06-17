@@ -1,35 +1,18 @@
 import React from "react";
+import DataTable from "react-data-table-component";
 
-const DataTable = ({ title, columns, data }) => {
+const EmployeeDataTable = ({ columns, data }) => {
   return (
-    <div>
-      <h1>{title}</h1>
-      <table>
-        <thead>
-          <tr>
-            {columns.map((column, index) => (
-              <th key={index}>{column.title}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {data.length > 0 ? (
-            data.map((employee, index) => (
-              <tr key={index}>
-                {columns.map((column, colIndex) => (
-                  <td key={colIndex}>{employee[column.data]}</td>
-                ))}
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan={columns.length}>No employees found</td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-    </div>
+    <DataTable
+      columns={columns}
+      data={data}
+      pagination
+      highlightOnHover
+      striped
+      subHeader
+      subHeaderComponent={<input type="text" placeholder="Filter by name" />}
+    />
   );
 };
 
-export default DataTable;
+export default EmployeeDataTable;

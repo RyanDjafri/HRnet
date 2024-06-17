@@ -1,56 +1,66 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import DataTable from "./DataTable";
+import React, { useState, useMemo } from "react";
+import EmployeeDataTable from "../components/DataTable";
 
 const EmployeeList = () => {
-  const employees = useSelector((state) => state.employees.employees);
   const [filterText, setFilterText] = useState("");
 
-  const columns = [
-    { name: "First Name", selector: (row) => row.firstName, sortable: true },
-    { name: "Last Name", selector: (row) => row.lastName, sortable: true },
-    {
-      name: "Date of Birth",
-      selector: (row) => row.dateOfBirth,
-      sortable: true,
-    },
-    { name: "Start Date", selector: (row) => row.startDate, sortable: true },
-    { name: "Department", selector: (row) => row.department, sortable: true },
-    { name: "Street", selector: (row) => row.street, sortable: true },
-    { name: "City", selector: (row) => row.city, sortable: true },
-    { name: "State", selector: (row) => row.state, sortable: true },
-    { name: "Zip Code", selector: (row) => row.zipCode, sortable: true },
-  ];
+  const data = useMemo(
+    () => [
+      {
+        firstName: "John",
+        lastName: "Doe",
+        dateOfBirth: "1990-01-01",
+        startDate: "2020-01-01",
+        department: "HR",
+        street: "123 Main St",
+        city: "New York",
+        state: "NY",
+        zipCode: "10001",
+      },
+      {
+        firstName: "Jane",
+        lastName: "Smith",
+        dateOfBirth: "1985-05-15",
+        startDate: "2019-07-23",
+        department: "Engineering",
+        street: "456 Elm St",
+        city: "San Francisco",
+        state: "CA",
+        zipCode: "94101",
+      },
+    ],
+    []
+  );
 
-  const handleFilterChange = (e) => {
-    setFilterText(e.target.value);
-  };
+  const columns = useMemo(
+    () => [
+      { name: "First Name", selector: (row) => row.firstName, sortable: true },
+      { name: "Last Name", selector: (row) => row.lastName, sortable: true },
+      {
+        name: "Date of Birth",
+        selector: (row) => row.dateOfBirth,
+        sortable: true,
+      },
+      { name: "Start Date", selector: (row) => row.startDate, sortable: true },
+      { name: "Department", selector: (row) => row.department, sortable: true },
+      { name: "Street", selector: (row) => row.street, sortable: true },
+      { name: "City", selector: (row) => row.city, sortable: true },
+      { name: "State", selector: (row) => row.state, sortable: true },
+      { name: "Zip Code", selector: (row) => row.zipCode, sortable: true },
+    ],
+    []
+  );
 
-  const filteredData = employees.filter((item) =>
-    columns.some((column) =>
-      item[column.selector]
-        ?.toString()
-        .toLowerCase()
-        .includes(filterText.toLowerCase())
-    )
+  const filteredData = data.filter(
+    (item) =>
+      item.firstName.toLowerCase().includes(filterText.toLowerCase()) ||
+      item.lastName.toLowerCase().includes(filterText.toLowerCase())
   );
 
   return (
     <div>
       <h1>Current Employees</h1>
-      <input
-        type="text"
-        placeholder="Filter"
-        value={filterText}
-        onChange={handleFilterChange}
-      />
-      <DataTable
-        columns={columns}
-        data={filteredData}
-        pagination
-        highlightOnHover
-        striped
-      />
+      <EmployeeDataTable columns={columns} data={filteredData} />
     </div>
   );
 };

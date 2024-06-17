@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import Modal from "../components/Modal";
+import { addEmployee } from "../components/redux/actions";
 
 const Home = () => {
   const [states, setStates] = useState([]);
@@ -13,6 +15,7 @@ const Home = () => {
   const [state, setState] = useState("");
   const [zipCode, setZipCode] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const statesData = [
@@ -92,6 +95,7 @@ const Home = () => {
       state,
       zipCode,
     };
+    dispatch(addEmployee(employee));
     setIsModalOpen(true);
   };
 

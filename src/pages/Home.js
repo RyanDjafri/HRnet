@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Modal from "../components/Modal";
 import { addEmployee } from "../components/redux/actions";
+import DateTimePicker from "../components/DateTimePicker";
 
 const Home = () => {
   const [states, setStates] = useState([]);
@@ -136,21 +137,11 @@ const Home = () => {
         </div>
         <div>
           <label>Date of Birth</label>
-          <input
-            type="date"
-            value={dateOfBirth}
-            onChange={(e) => setDateOfBirth(e.target.value)}
-            required
-          />
+          <DateTimePicker value={(e) => setDateOfBirth(e.target.value)} />
         </div>
         <div>
           <label>Start Date</label>
-          <input
-            type="date"
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
-            required
-          />
+          <DateTimePicker value={(e) => setStartDate(e.target.value)} />
         </div>
         <div>
           <label>Department</label>

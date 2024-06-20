@@ -1,5 +1,3 @@
-// EmployeeList.js
-
 import React, { useState, useMemo } from "react";
 import { useSelector } from "react-redux";
 import EmployeeDataTable from "../components/DataTable";

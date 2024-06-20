@@ -10,8 +10,8 @@ const Home = () => {
   const [states, setStates] = useState([]);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState("");
-  const [startDate, setStartDate] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState(moment());
+  const [startDate, setStartDate] = useState(moment());
   const [department, setDepartment] = useState("");
   const [street, setStreet] = useState("");
   const [city, setCity] = useState("");
@@ -114,16 +114,19 @@ const Home = () => {
     setState("");
     setZipCode("");
   };
+
   const handleDateOfBirthChange = (date) => {
-    setDateOfBirth(date);
+    setDateOfBirth(moment(date));
   };
-  const handleDateOfStartChange = (date) => {
-    setStartDate(date);
+
+  const handleStartDateChange = (date) => {
+    setStartDate(moment(date));
   };
   return (
     <div className="form">
       <form onSubmit={handleSubmit}>
         <h1>HRnet</h1>
+        <NavLink to="/employee">See Employees</NavLink>
         <div>
           <label>First Name</label>
           <input
@@ -151,10 +154,7 @@ const Home = () => {
         </div>
         <div>
           <label>Start Date</label>
-          <DateTimePicker
-            value={startDate}
-            onChange={handleDateOfStartChange}
-          />
+          <DateTimePicker value={startDate} onChange={handleStartDateChange} />
         </div>
         <div>
           <label>Department</label>
@@ -218,6 +218,7 @@ const Home = () => {
         <h2>Employee Saved!</h2>
         <p>The employee has been successfully saved.</p>
         <button onClick={closeModal}>Close</button>
+        <br />
         <NavLink to="/employee">See Employees</NavLink>
       </Modal>
     </div>

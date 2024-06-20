@@ -96,6 +96,7 @@ const Home = () => {
       state,
       zipCode,
     };
+    console.log(employee);
     dispatch(addEmployee(employee));
     setIsModalOpen(true);
   };
@@ -112,7 +113,12 @@ const Home = () => {
     setState("");
     setZipCode("");
   };
-
+  const handleDateOfBirthChange = (date) => {
+    setDateOfBirth(date);
+  };
+  const handleDateOfStartChange = (date) => {
+    setStartDate(date);
+  };
   return (
     <div className="form">
       <form onSubmit={handleSubmit}>
@@ -137,11 +143,17 @@ const Home = () => {
         </div>
         <div>
           <label>Date of Birth</label>
-          <DateTimePicker value={(e) => setDateOfBirth(e.target.value)} />
+          <DateTimePicker
+            value={dateOfBirth}
+            onChange={handleDateOfBirthChange}
+          />
         </div>
         <div>
           <label>Start Date</label>
-          <DateTimePicker value={(e) => setStartDate(e.target.value)} />
+          <DateTimePicker
+            value={startDate}
+            onChange={handleDateOfStartChange}
+          />
         </div>
         <div>
           <label>Department</label>

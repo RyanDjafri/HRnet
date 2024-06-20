@@ -1,36 +1,13 @@
+// EmployeeList.js
+
 import React, { useState, useMemo } from "react";
+import { useSelector } from "react-redux";
 import EmployeeDataTable from "../components/DataTable";
 
 const EmployeeList = () => {
   const [filterText, setFilterText] = useState("");
 
-  const data = useMemo(
-    () => [
-      {
-        firstName: "John",
-        lastName: "Doe",
-        dateOfBirth: "1990-01-01",
-        startDate: "2020-01-01",
-        department: "HR",
-        street: "123 Main St",
-        city: "New York",
-        state: "NY",
-        zipCode: "10001",
-      },
-      {
-        firstName: "Jane",
-        lastName: "Smith",
-        dateOfBirth: "1985-05-15",
-        startDate: "2019-07-23",
-        department: "Engineering",
-        street: "456 Elm St",
-        city: "San Francisco",
-        state: "CA",
-        zipCode: "94101",
-      },
-    ],
-    []
-  );
+  const data = useSelector((state) => state.employees);
 
   const columns = useMemo(
     () => [

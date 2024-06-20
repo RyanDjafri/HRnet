@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import moment from "moment";
 import Modal from "../components/Modal";
 import { addEmployee } from "../components/redux/actions";
 import DateTimePicker from "../components/DateTimePicker";
+import { NavLink } from "react-router-dom";
 
 const Home = () => {
   const [states, setStates] = useState([]);
@@ -88,15 +90,14 @@ const Home = () => {
     const employee = {
       firstName,
       lastName,
-      dateOfBirth,
-      startDate,
+      dateOfBirth: dateOfBirth.format("YYYY-MM-DD"),
+      startDate: startDate.format("YYYY-MM-DD"),
       department,
       street,
       city,
       state,
       zipCode,
     };
-    console.log(employee);
     dispatch(addEmployee(employee));
     setIsModalOpen(true);
   };
@@ -105,8 +106,8 @@ const Home = () => {
     setIsModalOpen(false);
     setFirstName("");
     setLastName("");
-    setDateOfBirth("");
-    setStartDate("");
+    setDateOfBirth(moment());
+    setStartDate(moment());
     setDepartment("");
     setStreet("");
     setCity("");
@@ -217,6 +218,7 @@ const Home = () => {
         <h2>Employee Saved!</h2>
         <p>The employee has been successfully saved.</p>
         <button onClick={closeModal}>Close</button>
+        <NavLink to="/employee">See Employees</NavLink>
       </Modal>
     </div>
   );

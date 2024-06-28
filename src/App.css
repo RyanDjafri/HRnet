@@ -4,7 +4,12 @@
     justify-content: center;
 }
 
-
+.employee-title{
+    text-align: center;
+}
+.home-link {
+    text-align: center;
+}
 .container {
     display: flex;
     flex-direction: column;
@@ -32,7 +37,7 @@ form {
     align-items: center;
     flex-direction: column;
     background-color: rgba(83, 210, 83, 0.484);
-    width:40%;
+    width:45%;
     height:95vh;
     margin:2rem auto;
 }
@@ -69,3 +74,11 @@ form {
     cursor: pointer;
   }
   
+  .employee-container {
+    margin:2rem auto;
+    width:80%;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    flex-direction: column;
+  }

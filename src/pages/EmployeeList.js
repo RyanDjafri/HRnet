@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from "react";
 import { useSelector } from "react-redux";
 import EmployeeDataTable from "../components/DataTable";
+import { NavLink } from "react-router-dom";
 
 const EmployeeList = () => {
   const [filterText, setFilterText] = useState("");
@@ -33,9 +34,10 @@ const EmployeeList = () => {
   );
 
   return (
-    <div>
-      <h1>Current Employees</h1>
+    <div className="employee-container">
+      <h2 className="employee-title">Current employees</h2>
       <EmployeeDataTable columns={columns} data={filteredData} />
+      <NavLink to="/">Home</NavLink>
     </div>
   );
 };
